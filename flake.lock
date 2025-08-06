@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "asm-lsp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753740826,
+        "narHash": "sha256-qO9PF7VKZUe+nd3e6eQhsutvM6CqA7u6qDm0+yleIy4=",
+        "owner": "bergercookie",
+        "repo": "asm-lsp",
+        "rev": "ba39d0155216fc7d6f011522a849126d3f9f461b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bergercookie",
+        "repo": "asm-lsp",
+        "rev": "ba39d0155216fc7d6f011522a849126d3f9f461b",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -36,6 +53,7 @@
     },
     "root": {
       "inputs": {
+        "asm-lsp": "asm-lsp",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       }
