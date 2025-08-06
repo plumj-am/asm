@@ -2,3 +2,7 @@
 .envrc
 *.bin
 target/
+
+# ignore executables
+hello_world
+template

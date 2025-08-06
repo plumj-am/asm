@@ -54,3 +54,10 @@ watch name:
 # list available programs
 list:
     @ls -1 *.asm | sed 's/\.asm$//'
+
+# create new program from template
+new name:
+    @cp template.asm {{name}}.asm
+    @echo "{{name}}" >> .gitignore
+    @printf '> CREATED: {{name}}.asm from template\n'
+    @printf '> ADDED: {{name}} to .gitignore\n'
