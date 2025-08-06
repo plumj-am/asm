@@ -1,0 +1,56 @@
+OUTDIR := "./target"
+
+alias b := build
+alias ba := build-all
+alias r := run
+alias c := clean
+alias d := disasm
+alias i := info
+alias w := watch
+alias l := list
+
+# default recipe
+default: 
+    @just --list
+
+# build a specific binary
+build name: 
+    @printf '> BUILDING: {{name}}\n\n'
+    @mkdir -p {{OUTDIR}}
+    @fasm {{name}}.asm {{OUTDIR}}/{{name}}
+
+# run a specific binary
+run name: (build name)
+    @printf '\n> RUNNING: {{name}}\n\n'
+    @{{OUTDIR}}/{{name}}
+
+# build all asm files
+build-all:
+    @mkdir -p {{OUTDIR}}
+    @for f in *.asm; do fasm "$f" "{{OUTDIR}}/${f%.asm}"; done
+
+# clean build artifacts
+clean:
+    @printf '> CLEANING BUILD ARTIFACTS'
+    @rm -rf {{OUTDIR}}
+    @rm -f *.bin
+
+# disassemble a specific binary
+disasm name: (build name)
+    @printf '> DISASSEMBLING: {{name}}'
+    @objdump -D -S {{OUTDIR}}/{{name}}
+
+# check file information for specific binary
+info name: (build name)
+    @printf '> FETCHING FILE INFO FOR: {{name}}'
+    @file {{OUTDIR}}/{{name}}
+    @readelf -h {{OUTDIR}}/{{name}}
+
+# watch for changes and rebuild specific binary
+watch name:
+    @printf '> WATCHING FOR CHANGES IN: {{name}}'
+    @while inotifywait -e modify {{name}}.asm; do just build {{name}}; done
+
+# list available programs
+list:
+    @ls -1 *.asm | sed 's/\.asm$//'
