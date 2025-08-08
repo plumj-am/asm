@@ -1,19 +1,28 @@
-format ELF64 executable 3	; Linux x86-64 output
-entry start			; specify entry point
+; <NAME>: <DESC>.
+;
+; Author: James Plummer <jamesp2001@live.co.uk>
+; Source: https://github.com/jamesukiyo/asm/blob/master/<NAME>.asm
+; Last modified: YYYY-MM-DD
+; License: MIT
 
-segment readable executable	; code section where all executable code lives
+format ELF64 executable 3       ; Linux x86-64 output
+entry start                     ; specify entry point
+
+segment readable executable     ; code section where all executable code lives
+
 start:
-	; CODE HERE
 
-	; exit cleanly with sys_exit
-	mov rax, 60		; system call number for exit
-	mov rdi, 0		; exit status 0
-	syscall			; never returns
+    ; CODE HERE
 
-segment readable writeable	; static data section
+    ; exit cleanly
+    mov rax, 60                 ; system call number for exit
+    mov rdi, 0                  ; exit status 0
+    syscall                     ; never returns
 
-; STATIC DATA HERE
+segment readable writeable      ; static data section
+
+; DATA HERE
 
 ; example
-message	db "Hello world!", 10, 0
-message_len = $ - message	; `$` gives the current address
+msg db "Hello world!", 10, 0
+msg_len = $ - msg               ; `$` gives the current address
