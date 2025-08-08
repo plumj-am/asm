@@ -4,5 +4,6 @@
 target/
 
 # ignore executables
-hello_world
 template
+hello_world
+ascii_conversion
