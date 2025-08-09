@@ -1,7 +1,8 @@
 ; <NAME>: <DESC>.
 ;
+; Assembler: FASM
 ; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/<NAME>.asm
+; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/<NAME>.asm
 ; Last modified: YYYY-MM-DD
 ; License: MIT
 
@@ -11,7 +12,6 @@ entry start                     ; specify entry point
 segment readable executable     ; code section where all executable code lives
 
 start:
-
     ; CODE HERE
 
     ; exit cleanly
@@ -24,5 +24,6 @@ segment readable writeable      ; static data section
 ; DATA HERE
 
 ; example
-msg db "Hello world!", 10, 0
-msg_len = $ - msg               ; `$` gives the current address
+msg db "Hello world!", 10, 0    ; static message
+msg_len = $ - msg               ; message length computed at compile time
+                                ; `$` gives the current address

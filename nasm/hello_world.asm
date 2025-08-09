@@ -5,11 +5,10 @@
 ; Last modified: 2025-08-08
 ; License: MIT
 
-format ELF64 executable 3       ; Linux x86-64 output
-entry start                     ; specify entry point
+section .text                   ; section for code
+global _start                   ; specify entry point
 
-segment readable executable     ; code section where all executable code lives
-start:
+_start:
 
     ; write "Hello world!" to stdout using sys_write
     ; like `std::io::stdout().write_all(b"Hello world!!\n").unwrap()` I think?
@@ -27,8 +26,8 @@ start:
     mov rdi, 0                  ; exit status 0
     syscall                     ; never returns like `-> !`
 
-segment readable writeable      ; static data section
+section .data                   ; static data section
 
 msg db "Hello world!", 10, 0    ; `static MESSAGE: &[u8] = b"Hello world!\n\0;`
-msg_len = $ - msg               ; `MESSAGE.len()` computed at compile time      
+msg_len equ $ - msg             ; `MESSAGE.len()` computed at compile time      
                                 ; `$` gives the current address

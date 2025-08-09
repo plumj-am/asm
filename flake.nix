@@ -33,10 +33,17 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            fasm
-            just
-          ] ++ [ asm-lsp-latest ];
+          buildInputs =
+            with pkgs;
+            [
+              gcc
+              gdb
+              fasm
+              nasm
+              just
+              inotify-tools
+            ]
+            ++ [ asm-lsp-latest ];
         };
       }
     );

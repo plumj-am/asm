@@ -1,5 +1,6 @@
 ; ascii_conversion: convert an 8-bit number `n` to ascii and print to stdout.
 ;
+; Assembler: FASM
 ; Author: James Plummer <jamesp2001@live.co.uk>
 ; Source: https://github.com/jamesukiyo/asm/blob/master/ascii_conversion.asm
 ; Last modified: 2025-08-08

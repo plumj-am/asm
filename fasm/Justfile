@@ -48,8 +48,8 @@ info name: (build name)
 
 # watch for changes and rebuild specific binary
 watch name:
-    @printf '> WATCHING FOR CHANGES IN: {{name}}'
-    @while inotifywait -e modify {{name}}.asm; do just build {{name}}; done
+    @printf '> WATCHING FOR CHANGES IN: {{name}}\n\n'
+    @while inotifywait -q -e modify {{name}}.asm; do just run {{name}}; done
 
 # list available programs
 list:
@@ -58,6 +58,6 @@ list:
 # create new program from template
 new name:
     @cp template.asm {{name}}.asm
-    @echo "{{name}}" >> .gitignore
+    @echo "{{name}}" >> ../.gitignore
     @printf '> CREATED: {{name}}.asm from template\n'
     @printf '> ADDED: {{name}} to .gitignore\n'

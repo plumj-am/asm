@@ -2,8 +2,10 @@
 .envrc
 *.bin
 target/
+*.o
 
 # ignore executables
 template
 hello_world
 ascii_conversion
+for_loop
