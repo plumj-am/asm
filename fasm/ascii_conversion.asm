@@ -2,8 +2,8 @@
 ;
 ; Assembler: FASM
 ; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/ascii_conversion.asm
-; Last modified: 2025-08-08
+; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/ascii_conversion.asm
+; Last modified: 2025-08-09
 ; License: MIT
 
 format ELF64 executable 3       ; Linux x86-64 output

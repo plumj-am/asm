@@ -2,7 +2,7 @@
 ;
 ; Assembler: FASM
 ; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/hello_world.asm
+; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/hello_world.asm
 ; Last modified: 2025-08-09
 ; License: MIT
 

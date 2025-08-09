@@ -1,8 +1,9 @@
 ; hello_world: print "Hello world!" to stdout.
 ;
+; Assembler: NASM
 ; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/hello_world.asm
-; Last modified: 2025-08-08
+; Source: https://github.com/jamesukiyo/asm/blob/master/nasm/hello_world.asm
+; Last modified: 2025-08-09
 ; License: MIT
 
 section .text                   ; section for code
