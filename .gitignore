@@ -1,11 +1,12 @@
-.direnv/
-.envrc
-*.bin
-target/
-*.o
+*
+!.gitignore
 
-# ignore executables
-template
-hello_world
-ascii_conversion
-for_loop
+# PROJECTS
+!nasm/
+!fasm/
+
+# MISC
+!.gitattributes
+!flake.*
+!Justfile
+!NOTES.md

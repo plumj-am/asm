@@ -106,6 +106,4 @@ list:
 # create new program from template
 new project name:
     @cd {{project}} && cp template.asm {{name}}.asm
-    @echo "{{project}}/{{name}}" >> .gitignore
     @printf '> CREATED: {{project}}/{{name}}.asm from template\n'
-    @printf '> ADDED: {{project}}/{{name}} to .gitignore\n'
