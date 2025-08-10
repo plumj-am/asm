@@ -1,6 +1,8 @@
-# jamesukiyo's learning notes for flat assembler
+# jamesukiyo's learning notes for fasm and nasm
 
-## Registers and memory addressing
+## General
+
+### Registers and memory addressing
 
 x86-64 provides 16 general purpose registers. The main ones are:
 - `rax` (accumulator):  return values, syscall numbers
@@ -17,7 +19,7 @@ Registers can be accessed in different sizes such as:
 - `al`:    u8 -  8-bit
 
 When writing to a smaller register, like `EAX` for example, the upper 32-bits 
-are zeroed out.
+of the full register are zeroed out.
 
 Memory addressing supports several modes:
 ```asm
@@ -28,7 +30,7 @@ mov rax, [rbx + rcx*4]      ; slice[index] for 4 byte values
 mov rax, [rbx + rcx*8 + 16] ; more complex pointer arithmetic
 ```
 
-## Instructions
+### Instructions
 
 Moving data is the core operation. The `mov` instruction **copies** data between
 locations.
@@ -59,6 +61,43 @@ jmp always_label        ; unconditional jump like `loop { break }`
 Function calls use `call` and `ret`. The first six integer arguments are passed
 into registers `rdi`, `rsi`, `rdx`, `rcx`, `r8` and `r9`. This isn't type
 checked.
+
+### System calls
+
+Syscalls are a way to call operating system functions. The number is passed in
+`rax` and determines the syscall to make. Some examples:
+```asm
+mov rax, 0                      ; sys_read
+mov rax, 1                      ; sys_write
+mov rax, 60                     ; sys_exit
+```
+
+### File descriptors
+
+File descriptors are used to determine which file to read from or write to. The
+number is passed in `rdi`. Some examples:
+```asm
+mov rdi, 0                      ; stdin
+mov rdi, 1                      ; stdout
+mov rdi, 2                      ; stderr
+```
+
+### rsi and rdx
+
+`rsi` and `rdx` are used to pass arguments to syscalls. Some examples:
+```asm
+mov rax, 1                      ; sys_write
+mov rdi, 1                      ; stdout
+
+mov rsi, msg                    ; `message` will be passed to sys_write
+                                ; `msg` must be an address
+mov rdx, msg_len                ; `msg_len` will be passed to sys_write
+                                ; `msg_len` states the number of bytes
+syscall                         ; call sys_write
+                                ; `message` will be written to stdout
+```
+
+## FASM-specific
 
 FASM's `format` directive determines output type.
 ```asm
@@ -107,3 +146,17 @@ Anonymous labels provide local scope similar to block expressions in Rust:
     je  @f                  ; jump forward like `break` in a loop
 @@:                         ; anonymous label end
 ```
+
+## NASM-specific
+
+## Disorganised notes
+
+Registers r12-15 are not affected by syscalls. I still don't understand why
+and how the other registers are. A good example can be seen in
+[./nasm/loop.asm](./nasm/loop.asm) and [./fasm/loop.asm](./fasm/loop.asm). Notes
+are included at the bottom. After testing earlier, I found that rcx was getting
+clobbered by the syscall but after switching to r12 the loop worked fine. I did
+actually try r8 and that worked too but if what I've read is correct, r8 can
+potentially be clobbered by the syscall whereas r12 can not.
+
+
