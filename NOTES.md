@@ -149,6 +149,8 @@ Anonymous labels provide local scope similar to block expressions in Rust:
 
 ## NASM-specific
 
+...
+
 ## Disorganised notes
 
 Registers r12-15 are not affected by syscalls. I still don't understand why
@@ -158,5 +160,14 @@ are included at the bottom. After testing earlier, I found that rcx was getting
 clobbered by the syscall but after switching to r12 the loop worked fine. I did
 actually try r8 and that worked too but if what I've read is correct, r8 can
 potentially be clobbered by the syscall whereas r12 can not.
+
+The `movzx` instruction safely loads smaller values into larger registers by
+zero-padding the remaining bits. For example, `movzx rax, byte [num1]` loads
+only 1 byte from memory and zeros out the upper 56 bits of rax, whereas `mov
+rax, [num1]` would try to load 8 bytes and grab garbage from adjacent memory.
+This should prevent memory corruption when working with single-byte variables. 
+A good example is in [./nasm/calculator.asm] where `mov` was reading random data
+alongside my actual numbers so I switch to `movzx`. Idk yet if this is 100%
+correct but from what I know so far it's good.
 
 
