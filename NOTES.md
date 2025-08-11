@@ -172,6 +172,10 @@ A good example is in [./nasm/calculator.asm] where `mov` was reading random data
 alongside my actual numbers so I switch to `movzx`. Idk yet if this is 100%
 correct but from what I know so far it's good.
 
-Data in the `section .bss` section does not take up space in the executable
-file unline the `section .data` section which stores static data.
+In NASM, data in the `section .bss` section does not take up space in the 
+executable file unline the `section .data` section which stores static data. 
+In FASM, unitialised data can be stored in the `segment readable writeable` 
+segment and I believe this works in the same way as the `.bss` section in NASM,
+meaning it doesn't take up space in the executable file. `section .bss` in NASM
+appears to be the same as `segment readable` in FASM and stores static data.
 
