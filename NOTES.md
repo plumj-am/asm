@@ -159,7 +159,9 @@ and how the other registers are. A good example can be seen in
 are included at the bottom. After testing earlier, I found that rcx was getting
 clobbered by the syscall but after switching to r12 the loop worked fine. I did
 actually try r8 and that worked too but if what I've read is correct, r8 can
-potentially be clobbered by the syscall whereas r12 can not.
+potentially be clobbered by the syscall whereas r12 can not. Additionally, you
+can avoid clobbering by using `push` and `pop` to save and restore registers as
+seen in [./nasm/word_count.asm](./nasm/word_count.asm).
 
 The `movzx` instruction safely loads smaller values into larger registers by
 zero-padding the remaining bits. For example, `movzx rax, byte [num1]` loads
@@ -170,4 +172,6 @@ A good example is in [./nasm/calculator.asm] where `mov` was reading random data
 alongside my actual numbers so I switch to `movzx`. Idk yet if this is 100%
 correct but from what I know so far it's good.
 
+Data in the `section .bss` section does not take up space in the executable
+file unline the `section .data` section which stores static data.
 

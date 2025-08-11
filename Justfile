@@ -48,9 +48,10 @@ build-release project name:
         stat -c "final size: %s bytes" {{OUTDIR}}/{{name}}
 
 # run a specific program
-run project name: (build project name)
+[positional-arguments]
+run project name arg="": (build project name)
     @printf '\n> RUNNING: {{name}} from {{project}}/\n\n'
-    @{{project}}/{{OUTDIR}}/{{name}}
+    @{{project}}/{{OUTDIR}}/{{name}} {{arg}}
 
 
 # clean build artifacts for a project
