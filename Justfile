@@ -49,9 +49,9 @@ build-release project name:
 
 # run a specific program
 [positional-arguments]
-run project name arg="": (build project name)
+run project name arg1="" arg2="": (build project name)
     @printf '\n> RUNNING: {{name}} from {{project}}/\n\n'
-    @{{project}}/{{OUTDIR}}/{{name}} {{arg}}
+    @{{project}}/{{OUTDIR}}/{{name}} {{arg1}} {{arg2}}
 
 
 # clean build artifacts for a project

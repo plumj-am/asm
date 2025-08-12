@@ -179,3 +179,7 @@ segment and I believe this works in the same way as the `.bss` section in NASM,
 meaning it doesn't take up space in the executable file. `section .bss` in NASM
 appears to be the same as `segment readable` in FASM and stores static data.
 
+When performing actions that need to stop at a newline but include it, you need
+to increment or similar to include the line number. Not sure how to explain this
+well but it can be seen on line 126 of [./nasm/head.asm](./nasm/head.asm). Maybe
+it's easier to understand there..
