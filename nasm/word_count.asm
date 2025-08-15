@@ -252,8 +252,7 @@ newline db 10
 output db "The total word count of the file is: "
 output_len equ $ - output
 ; ERRORS
-usage_err db "Incorrect or broken args provided. Please provide a single arg \
-that is the full name of the file to count words for."
+usage_err db "Usage: word_count <FILE>"
 usage_err_len equ $ - usage_err
 file_err db "An error occurred while reading the file. Please try again."
 file_err_len equ $ - file_err

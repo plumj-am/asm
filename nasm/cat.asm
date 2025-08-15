@@ -138,8 +138,7 @@ exit:
 ;================================
 section .data
 ; ERRORS
-usage_err db "Incorrect or broken args provided. Please provide a single arg \
-that is the full name of the file to cat."
+usage_err db "Usage: cat <FILE>"
 usage_err_len equ $ - usage_err
 file_err db "An error occurred while reading the file. Please try again."
 file_err_len equ $ - file_err

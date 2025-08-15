@@ -222,8 +222,7 @@ exit:
 ;================================
 section .data
 ; ERRORS
-usage_err db "Incorrect or broken args provided. Please provide 2 args that are\
- the full name of the file to preview and the number of lines to display."
+usage_err db "Usage: head <FILE> <NUM_OF_LINES>"
 usage_err_len equ $ - usage_err
 file_err db "An error occurred while reading the file. Please try again."
 file_err_len equ $ - file_err
