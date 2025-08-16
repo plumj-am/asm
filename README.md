@@ -24,10 +24,13 @@ changes compared to the original version.
  
 ## Usage:
 
-There is a nix flake with all the necessary tooling in ./flake.nix.
+There is a nix flake with all the necessary tooling in [./flake.nix](./flake.nix).
 
 You can use it with `nix develop` or add a `.envrc` file with `use flake`
 inside.
+
+Otherwise you will need to install `just`, `fasm` and `nasm`. If you want to use
+"hot reloading" via the `watch` recipe, you will also need `inotify-tools`.
 
 Check the [./Justfile](./Justfile) for recipes you can use. You may have to 
 adjust them depending on your OS and CPU architecture. I am on x64 Linux so it 
