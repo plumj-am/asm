@@ -12,6 +12,16 @@ the repository so I can improve.
 
 My notes can be found in [./NOTES.md](./NOTES.md).
 
+## Notes:
+
+- All programs that do not have a number suffix e.g. `word_count` are the
+original versions of the programs and will not be changed. 
+- The number suffixed programs are my improved versions such as `word_count_2`
+and will be incrementally improved as time goes on.
+- At most one program will have 2 versions, the original and the improved.
+- Inside the comment header of the improved programs, there will be a list of
+changes compared to the original version.
+ 
 ## Usage:
 
 There is a nix flake with all the necessary tooling in ./flake.nix.
