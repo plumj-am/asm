@@ -1,5 +1,10 @@
 # jamesukiyo's learning notes for fasm and nasm
 
+This file is a collection of notes I've made while learning NASM and FASM. The
+initial FASM notes consist of Rust comparisons I made when getting started. They
+aren't present everywhere and may not be 100% accurate. Now I tend not to worry
+about such comparisons because my understanding of asm is better.
+
 ## General
 
 ### Registers and memory addressing
@@ -106,7 +111,7 @@ format PE64 console         ; Windows 64-bit console app
 format ELF64                ; Object file for linking
 ```
 
-FASM's `segment` directive organises memory. Static data goes in `writeable`
+FASM's `segment` directive organises memory. Static data goes in `readable`
 segments and code goes in `executable` segments.
 ```asm
 segment readable executable ; code section
@@ -127,15 +132,17 @@ string_len = $ - my_string      ; compile-time length calculation
 
 FASM has a macro system which can generate macros similar to `macro_rules!`.
 ```asm
-macro syscall_write fd, buffer, count {
-    mov rax, 1                              ; sys_write
-    mov rdi, fd
+macro syscall_write file_descriptor, buffer, length {
+    mov rax, 1                  ; sys_write
+    mov rdi, file_descriptor
     mov rsi, buffer
-    mov rdx, count
+    mov rdx, length
     syscall
 }
 ; usage: syscall_write 1, message, message_len
 ```
+
+A real usage of FASM macros can be see in [./fasm/word_count_2.asm](./fasm/word_count_2.asm).
 
 Anonymous labels provide local scope similar to block expressions in Rust:
 ```asm
@@ -149,7 +156,22 @@ Anonymous labels provide local scope similar to block expressions in Rust:
 
 ## NASM-specific
 
-...
+NASM has a macro system which looks like this:
+```asm
+%macro syscall_write 3
+    mov rax, 1                              ; sys_write
+    mov rdi, %1
+    mov rsi, %2
+    mov rdx, %3
+    syscall
+%endmacro
+; usage: syscall_write 1, message, message_len
+```
+It differs from FASM's macros by using `%N` to refer to arguments instead of by
+name. NASM also does not use `{}` like FASM and instead uses explicit start and
+end keywords: `%macro` and `%endmacro`.
+
+A real usage of NASM macros can be see in [./nasm/word_count_2.asm](./nasm/word_count_2.asm).
 
 ## Disorganised notes
 
