@@ -1,10 +1,9 @@
-; ascii_conversion: convert an 8-bit number `n` to ascii and print to stdout.
-;
+; Name: ascii_conversion
+; Description: Convert an 8-bit number `n` to ascii and print to stdout.
 ; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/ascii_conversion.asm
-; Last modified: 2025-08-09
-; License: MIT
+; Usage: `ascii_conversion <NUMBER>`
+; Examples:
+; `ascii_conversion 8`
 
 format ELF64 executable 3       ; Linux x86-64 output
 entry start                     ; specify entry point
@@ -29,7 +28,7 @@ start:
 segment readable writeable      ; data section
 
 n = 5                           ; value to convert to ascii and print to stdout
-buf db 0                        ; define byte (db) buffer with size 0 
+buf db 0                        ; define byte (db) buffer with size 0
                                 ; doesn't matter since it will be overwritten
-                                ; size only matters if reading from it but we 
+                                ; size only matters if reading from it but we
                                 ; immediately overwrite it

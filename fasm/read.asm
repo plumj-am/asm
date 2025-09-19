@@ -1,13 +1,12 @@
-; read: read an input from stdin and echo it back via stdout.
-;
+; Name: read
+; Description: Read an input from stdin and echo it back via stdout.
 ; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/read.asm
-; Last modified: 2025-08-10
-; License: MIT
+; Usage: `read`
+; Examples:
+; `read`
 
 format ELF64 executable 3
-entry start 
+entry start
 
 segment readable writable
 in_data db 5                    ; "data" alone is a reserved keyword in fasm
@@ -28,7 +27,7 @@ start:
     mov rsi, in_data            ; addr of data
     mov rdx, 5                  ; 5 bytes - 1 for each char
     syscall
-    
+
     ; write output prompt
     mov rax, 1                  ; sys_write
     mov rdi, 1                  ; stdout file desc

@@ -1,10 +1,9 @@
-; hello_world: print "Hello world!" to stdout.
-;
+; Name: hello_world
+; Description: Print "Hello world!" to stdout.
 ; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/hello_world.asm
-; Last modified: 2025-08-09
-; License: MIT
+; Usage: `hello_world`
+; Examples:
+; `hello_world`
 
 format ELF64 executable 3       ; Linux x86-64 output
 entry start                     ; specify entry point
@@ -31,5 +30,5 @@ start:
 segment readable writeable      ; static data section
 
 msg db "Hello world!", 10, 0    ; `static MESSAGE: &[u8] = b"Hello world!\n\0;`
-msg_len = $ - msg               ; `MESSAGE.len()` computed at compile time      
+msg_len = $ - msg               ; `MESSAGE.len()` computed at compile time
                                 ; `$` gives the current address

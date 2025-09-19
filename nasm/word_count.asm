@@ -1,15 +1,10 @@
-; word_count: count the number of words in a file.
-;
-; usage: `word_count <FILE>`
-; examples: 
+; Name: word_count
+; Description: Count the number of words in a file.
+; Assembler: NASM
+; Usage: `word_count <FILE>`
+; Examples:
 ; `word_count ./nasm/hello_world`
 ; `word_count README.md`
-;
-; Assembler: NASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/nasm/word_count.asm
-; Last modified: 2025-08-11
-; License: MIT
 
 ;================================
 ; UNINITIALISED DATA
@@ -29,7 +24,7 @@ global _start
 
 _start:
     ; stack layout when program starts for my reference:
-    ; [rsp]     = argc (num of args)  
+    ; [rsp]     = argc (num of args)
     ; [rsp+8]   = argv[0] (program name)
     ; [rsp+16]  = argv[1] (first arg = filename)
     ; [rsp+24]  = argv[2] (second argument, not used but for reference)
@@ -43,7 +38,7 @@ _start:
     call copy_string            ; copy argv[1] to filename buffer
 
     jmp read_file               ; start reading the file
-    
+
 ;================================
 ; FILE READING
 ;================================
@@ -103,7 +98,7 @@ copy_done:
 process_chunk:
     ; rcx = bytes to process, rsi = buffer start
 process_char:
-   cmp rcx, 0                   ; check if done 
+   cmp rcx, 0                   ; check if done
    je process_done              ; jump to process_done if rcx==0
 
    movzx rax, byte [rsi]        ; get current char
@@ -120,7 +115,7 @@ process_char:
    cmp byte [in_word], 0        ; check if in a word
    jne next_char                ; if yes don't count it again
 
-   ; start of new word 
+   ; start of new word
    mov byte [in_word], 1        ; mark as in_word
    inc qword [wc]               ; word count += 1
    jmp next_char                ; continue
@@ -170,7 +165,7 @@ print_number:
     mov rbx, 10                 ; divisor
     mov rcx, 0                  ; digit counter
 
-digit_loop: 
+digit_loop:
     mov rdx, 0                  ; clear rdx for division
     div rbx                     ; rax /= 10, rdx = remainder
     add rdx, 48                 ; convert remainder to ascii

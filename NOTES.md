@@ -1,4 +1,4 @@
-# jamesukiyo's learning notes for fasm and nasm
+# PlumJam's Learning Notes for Assembler
 
 This file is a collection of notes I've made while learning NASM and FASM. The
 initial FASM notes consist of Rust comparisons I made when getting started. They
@@ -23,7 +23,7 @@ Registers can be accessed in different sizes such as:
 - `ax`:   u16 - 16-bit
 - `al`:    u8 -  8-bit
 
-When writing to a smaller register, like `EAX` for example, the upper 32-bits 
+When writing to a smaller register, like `EAX` for example, the upper 32-bits
 of the full register are zeroed out.
 
 Memory addressing supports several modes:
@@ -189,14 +189,14 @@ The `movzx` instruction safely loads smaller values into larger registers by
 zero-padding the remaining bits. For example, `movzx rax, byte [num1]` loads
 only 1 byte from memory and zeros out the upper 56 bits of rax, whereas `mov
 rax, [num1]` would try to load 8 bytes and grab garbage from adjacent memory.
-This should prevent memory corruption when working with single-byte variables. 
+This should prevent memory corruption when working with single-byte variables.
 A good example is in [./nasm/calculator.asm] where `mov` was reading random data
 alongside my actual numbers so I switch to `movzx`. Idk yet if this is 100%
 correct but from what I know so far it's good.
 
-In NASM, data in the `section .bss` section does not take up space in the 
-executable file unline the `section .data` section which stores static data. 
-In FASM, unitialised data can be stored in the `segment readable writeable` 
+In NASM, data in the `section .bss` section does not take up space in the
+executable file unline the `section .data` section which stores static data.
+In FASM, unitialised data can be stored in the `segment readable writeable`
 segment and I believe this works in the same way as the `.bss` section in NASM,
 meaning it doesn't take up space in the executable file. `section .bss` in NASM
 appears to be the same as `segment readable` in FASM and stores static data.
@@ -206,5 +206,5 @@ to increment or similar to include the line number. Not sure how to explain this
 well but it can be seen on line 126 of [./nasm/head.asm](./nasm/head.asm). Maybe
 it's easier to understand there..
 
-In FASM, you can't break strings in source code across newlines with `\` like 
+In FASM, you can't break strings in source code across newlines with `\` like
 you can in NASM.

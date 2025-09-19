@@ -1,10 +1,9 @@
-; hello_world: print "Hello world!" to stdout.
-;
+; Name: hello_world
+; Description: Print "Hello world!" to stdout.
 ; Assembler: NASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/nasm/hello_world.asm
-; Last modified: 2025-08-09
-; License: MIT
+; Usage: `hello_world`
+; Examples:
+; `hello_world`
 
 section .text                   ; section for code
 global _start                   ; specify entry point
@@ -30,5 +29,5 @@ _start:
 section .data                   ; static data section
 
 msg db "Hello world!", 10, 0    ; `static MESSAGE: &[u8] = b"Hello world!\n\0;`
-msg_len equ $ - msg             ; `MESSAGE.len()` computed at compile time      
+msg_len equ $ - msg             ; `MESSAGE.len()` computed at compile time
                                 ; `$` gives the current address

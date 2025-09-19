@@ -1,10 +1,9 @@
-; calculator: pick an operation and perform it on 2 single-digit numbers.
-;
+; Name: calculator
+; Description: Pick an operation and perform it on 2 single-digit numbers.
 ; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/calculator.asm
-; Last modified: 2025-08-11
-; License: MIT
+; Usage: `calculator`
+; Examples:
+; `calculator`
 
 format ELF64 executable 3       ; Linux x86-64 output
 entry start                     ; specify entry point
@@ -82,16 +81,16 @@ addition:
     movzx rax, byte [num1]      ; load first number as byte* (check eof notes)
     movzx rbx, byte [num2]      ; load second number as byte
     add rax, rbx                ; add and result in rax
-    
+
     ; convert result to two digits
     mov rbx, 10                 ; divisor to separate the digits
     mov rdx, 0                  ; clear rdx for division
     div rbx                     ; rax = "tens" digit, rdx = "ones" digit
-    
+
     ; convert both digits to ascii
     add rax, 48                 ; "tens" digit to ascii
     add rdx, 48                 ; "ones" digit to ascii
-    
+
     ; store in result buffer
     mov [result], al            ; first byte = "tens" digit
     mov [result+1], dl          ; second byte = "ones" digit
@@ -101,16 +100,16 @@ subtraction:
     movzx rax, byte [num1]      ; load first number as byte
     movzx rbx, byte [num2]      ; load second number as byte
     sub rax, rbx                ; subtract and result in rax
-    
+
     ; convert result to two digits
     mov rbx, 10                 ; divisor to separate the digits
     mov rdx, 0                  ; clear rdx for division
     div rbx                     ; rax = "tens" digit, rdx = "ones" digit
-    
+
     ; convert both digits to ascii
     add rax, 48                 ; "tens" digit to ascii
     add rdx, 48                 ; "ones" digit to ascii
-    
+
     ; store in result buffer
     mov [result], al            ; first byte = "tens" digit
     mov [result+1], dl          ; second byte = "ones" digit
@@ -121,16 +120,16 @@ division:
     mov rdx, 0                  ; clear rdx for division
     movzx rbx, byte [num2]      ; load second number as byte
     div rbx                     ; divide rax by rbx
-    
+
     ; convert result to two digits
     mov rbx, 10                 ; divisor for to separate the digits
     mov rdx, 0                  ; clear rdx for division
     div rbx                     ; rax = "tens" digit, rdx = "ones" digit
-    
+
     ; convert both digits to ascii
     add rax, 48                 ; "tens" digit to ascii
     add rdx, 48                 ; "ones" digit to ascii
-    
+
     ; store in result buffer
     mov [result], al            ; first byte = "tens" digit
     mov [result+1], dl          ; second byte = "ones" digit
@@ -138,22 +137,22 @@ division:
 
 multiplication:
     movzx rax, byte [num1]      ; load first number as byte
-    movzx rbx, byte [num2]      ; load second number as byte  
+    movzx rbx, byte [num2]      ; load second number as byte
     mul rbx                     ; multiply: result in rax
-    
+
     ; convert result to two digits
     mov rbx, 10                 ; divisor
     mov rdx, 0                  ; clear rdx for division
     div rbx                     ; rax = "tens" digit, rdx = "ones" digit
-    
+
     ; convert both digits to ascii
     add rax, 48                 ; "tens" digit to ascii
     add rdx, 48                 ; "ones" digit to ascii
-    
+
     ; store in result buffer
     mov [result], al            ; first byte = "tens" digit
     mov [result+1], dl          ; second byte = "ones" digit
-    
+
     jmp finish
 
 finish:

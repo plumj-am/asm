@@ -1,18 +1,14 @@
-; head: output the contents of a file down to a specified line to stdout.
+; Name: head
+; Description: Output the contents of a file down to a specified line to stdout.
 ;
-; usage: `head <FILE> <LINE>`
-; examples: 
+; Assembler: FASM
+; Usage: `head <FILE> <LINE>`
+; Examples:
 ; `head ./fasm/hello_world 50`
 ; `head README.md 24`
 ;
-; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/head.asm
-; Last modified: 2025-08-12
-; License: MIT
-
 ; Very similar implementation to `cat` and `word_count` so a lot of the logic
-; has been copied. The difference is that here we take a second argument and use 
+; has been copied. The difference is that here we take a second argument and use
 ; it to determine at what line we should stop reading the file. Also need to
 ; handle partial chunks since the final newline which indicates the end of the
 ; users requested line count can be in the middle of a chunk.
@@ -35,7 +31,7 @@ max_lines rq 1                ; arg 2 number of lines, qword so 8 bytes
 segment readable executable
 start:
     ; stack layout when program starts for my reference:
-    ; [rsp]     = argc (num of args)  
+    ; [rsp]     = argc (num of args)
     ; [rsp+8]   = argv[0] (program name)
     ; [rsp+16]  = argv[1] (first arg = filename)
     ; [rsp+24]  = argv[2] (second argument, not used but for reference)
@@ -53,7 +49,7 @@ start:
     mov [max_lines], rax        ; convert_number returns number in rax
 
     jmp read_file               ; start reading the file
-    
+
 ;================================
 ; FILE READING
 ;================================
@@ -85,7 +81,7 @@ read_loop:
     mov rcx, rax                ; bytes read count
     mov rsi, chunks             ; buffer start
     call process_chunk          ; process the current chunk
-    
+
     jmp read_loop               ; continue reading
 
 close_file:
@@ -104,7 +100,7 @@ process_chunk:
     mov r14, rcx                ; save original byte count
 
 process_char:
-   cmp rcx, 0                   ; check if done 
+   cmp rcx, 0                   ; check if done
    je write_full_chunk          ; write entire chunk if processed all
 
    movzx rax, byte [rsi]        ; get current char
@@ -183,7 +179,7 @@ convert_loop:
 
     inc rsi                     ; next char
     jmp convert_loop            ; continue converting
-    
+
 convert_done:
     ret                         ; rax now contains the number
 

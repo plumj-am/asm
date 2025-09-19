@@ -1,10 +1,9 @@
-; <NAME>: <DESC>.
-;
+; Name: <NAME>
+; Description: <DESCRIPTION>.
 ; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/<NAME>.asm
-; Last modified: YYYY-MM-DD
-; License: MIT
+; Usage: `<NAME> ...`
+; Examples:
+; `<NAME> ...`
 
 format ELF64 executable 3       ; Linux x86-64 output
 entry start                     ; specify entry point

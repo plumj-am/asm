@@ -1,10 +1,9 @@
-; loop: print from 1 to 9 with a loop to stdout, each separated by a newline.
-;
+; Name: loop
+; Description: Print from 1 to 9 with a loop to stdout, each separated by a newline.
 ; Assembler: NASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/nasm/loop.asm
-; Last modified: 2025-08-10
-; License: MIT
+; Usage: `loop`
+; Examples:
+; `loop`
 
 section .text
 global _start

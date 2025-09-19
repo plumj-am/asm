@@ -1,17 +1,12 @@
-; cat: output the contents of a file to stdout.
-;
-; usage: `cat <FILE>`
-; examples: 
+; Name: cat
+; Description: Output the contents of a file to stdout.
+; Assembler: FASM
+; Usage: `cat <FILE>`
+; Examples:
 ; `cat ./fasm/hello_world`
 ; `cat README.md`
-;
-; Assembler: FASM
-; Author: James Plummer <jamesp2001@live.co.uk>
-; Source: https://github.com/jamesukiyo/asm/blob/master/fasm/cat.asm
-; Last modified: 2025-08-12
-; License: MIT
 
-; This program is basically just `./word_count.asm` but simpler so it was 
+; This program is basically just `./word_count.asm` but simpler so it was
 ; quite easy to create from that as a template. Instead of processing chunks of
 ; data, I could just print immediately.
 
@@ -31,7 +26,7 @@ filename rb 256               ; user input filename buffer
 segment readable executable
 start:
     ; stack layout when program starts for my reference:
-    ; [rsp]     = argc (num of args)  
+    ; [rsp]     = argc (num of args)
     ; [rsp+8]   = argv[0] (program name)
     ; [rsp+16]  = argv[1] (first arg = filename)
     ; [rsp+24]  = argv[2] (second argument, not used but for reference)
@@ -45,7 +40,7 @@ start:
     call copy_string            ; copy argv[1] to filename buffer
 
     jmp read_file               ; start reading the file
-    
+
 ;================================
 ; FILE READING
 ;================================
